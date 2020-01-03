@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 const API = 'http://localhost:3000/fetches'
 
-class Search extends React.Component {
+class Search extends Component {
     constructor() {
         super()
 
