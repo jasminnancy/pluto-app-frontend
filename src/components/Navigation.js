@@ -1,35 +1,8 @@
 import React from 'react'
+import LoginContainer from '../containers/LoginContainer'
 import { Menu } from 'semantic-ui-react'
 
-const Navigation = () => {
-    const handleLogOut = () => {
-        localStorage.clear()
-        window.location.reload()
-    }
-    
-    const handleLogIn = () => {
-        localStorage.jwt = 'test' //remove this once login set up
-        window.location.reload()
-
-        // const login = (userObject) => {
-        //     fetch('http://localhost:3000/login', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'Accept': 'application/json'
-        //         },
-        //         body: JSON.stringify({user: userObject})
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         if (data.user){
-        //             localStorage.setItem('jwt', data.jwt)
-        //         } else {
-        //             alert('Invalid Username or Password')
-        //         }
-        //     })
-        // }
-    }
+const Navigation = () => {    
     return (
         <Menu size='huge' pointing secondary>
             <Menu.Item 
@@ -48,18 +21,7 @@ const Navigation = () => {
                 onClick={() => window.location.href = '/meal-planner'}
             />
             <Menu.Menu position='right'>
-                <Menu.Item 
-                    name={
-                        localStorage.jwt 
-                            ? 'Log Out'
-                                : 'Log In'
-                    }
-                    onClick={
-                        localStorage.jwt
-                            ? () => handleLogOut()
-                                : () => handleLogIn()
-                    }
-                />
+                <LoginContainer />
             </Menu.Menu>
         </Menu>
     )
