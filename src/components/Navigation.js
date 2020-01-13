@@ -1,8 +1,12 @@
 import React from 'react'
-import LoginContainer from '../containers/LoginContainer'
 import { Menu } from 'semantic-ui-react'
 
-const Navigation = () => {    
+const Navigation = () => {   
+    const handleLogOut = () => {
+        localStorage.clear()
+        window.location.reload()
+    }
+
     return (
         <Menu size='huge' pointing secondary>
             <Menu.Item 
@@ -21,7 +25,7 @@ const Navigation = () => {
                 onClick={() => window.location.href = '/meal-planner'}
             />
             <Menu.Menu position='right'>
-                <LoginContainer />
+                <Menu.Item name='Log Out' onClick={() => handleLogOut()}/>
             </Menu.Menu>
         </Menu>
     )

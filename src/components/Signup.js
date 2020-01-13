@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Form, Button } from 'semantic-ui-react'
+import { Grid, Form, Button, Header } from 'semantic-ui-react'
 
 class Signup extends Component {
     constructor(){
@@ -20,27 +20,23 @@ class Signup extends Component {
 
     handleLogIn = (userObject) => {
         if (userObject.password === userObject.pass_conf) {
-            localStorage.jwt = 'test' //remove this once login set up
-            window.location.reload()
-
-            // const login = (userObject) => {
-            //     fetch('http://localhost:3000/login', {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //             'Accept': 'application/json'
-            //         },
-            //         body: JSON.stringify({user: userObject})
-            //     })
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         if (data.user){
-            //             localStorage.setItem('jwt', data.jwt)
-            //         } else {
-            //             alert('Invalid Username or Password')
-            //         }
-            //     })
-            // }
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({user: userObject})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.user){
+                    localStorage.setItem('jwt', data.jwt)
+                    window.location.reload()
+                } else {
+                    alert('Invalid Username or Password')
+                }
+            })
         } else {
             alert("Passwords don't match! Please try again.")
         }
@@ -49,6 +45,7 @@ class Signup extends Component {
     render() {
         return (
             <Grid.Column>
+                <Header as='h1' content='Sign Up' />
                 <Form onSubmit={() => this.handleLogIn(this.state)}>
                     <Form.Input 
                         label='Username' 
